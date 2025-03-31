@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal App-specific styles */
+.monaco-editor {
+  padding-top: 8px;
+}
