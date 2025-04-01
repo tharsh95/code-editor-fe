@@ -43,9 +43,9 @@ api.interceptors.response.use(
 );
 
 // API methods
-export const getJobs = async () => {
+export const getJobs = async (page = 1) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/jobs`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/jobs?page=${page}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching jobs:', error);

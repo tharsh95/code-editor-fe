@@ -11,7 +11,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<JobsPage />} />
           <Route path="/questions/:jobId" element={<QuestionsPage />} />
-          <Route path="/editor/:jobId" element={<EditorPage />} />
+          <Route path="/editor/:jobId/:questionId" element={<EditorPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
