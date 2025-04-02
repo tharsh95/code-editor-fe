@@ -34,17 +34,12 @@ export default function JobListings({ onSelectJob }) {
   const handleRefresh = async () => {
     try {
       setLoading(true);
-      await fetch(`${import.meta.env.VITE_API_URL}/jobs/fetch`, {
-        method: 'POST',
-      });
-      // Update the total jobs count by adding 10
-      setPagination(prev => ({
-        ...prev,
-        totalJobs: prev.totalJobs + 10
-      }));
-      // Fetch the latest jobs
-      await fetchJobs(1);
-    } catch (error) {
+      // Show API limit message
+      setError('API LIMIT EXCEEDED');
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
+    } catch {
       setError('Failed to refresh jobs');
     } finally {
       setLoading(false);
@@ -125,6 +120,12 @@ export default function JobListings({ onSelectJob }) {
                     <span className="text-sm text-gray-500">•</span>
                     <span className="text-sm text-gray-500">
                       {job.remote_derived ? 'Remote' : job.locations_derived?.[0] || 'Location not specified'}
+                    </span>
+                    <span className="text-sm text-gray-500">•</span>
+                    <span className="text-sm text-gray-500">
+                      {job.questionsCount > 0 
+                        ? `${job.questionsCount} question${job.questionsCount !== 1 ? 's' : ''}`
+                        : 'Yet to fetch questions from OpenAI'}
                     </span>
                   </div>
                 </div>
